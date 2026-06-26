@@ -1,0 +1,276 @@
+/* ============================================
+   FWI Prediction — Forest Fire Risk Console
+   Theme: charred ember / weather-station readout
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #15110d;
+  --panel: #1f1814;
+  --panel-border: #3d2e22;
+  --ember: #ff6b35;
+  --ember-dim: #c9501f;
+  --ash: #e8dfd3;
+  --smoke: #8a7a6b;
+  --danger: #ff4d4d;
+  --field-bg: #14100c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* background-color: red; */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 800px 500px at 50% -10%, rgba(255, 107, 53, 0.08), transparent),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.015) 0px, rgba(255, 255, 255, 0.015) 1px, transparent 1px, transparent 3px);
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--ash);
+}
+
+.login {
+  width: 100%;
+  max-width: 600px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: 36px 40px 40px;
+  position: relative;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+/* top edge accent — like a heat-warning strip */
+.login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(90deg, var(--ember-dim), var(--ember) 50%, var(--ember-dim));
+}
+
+/* ---------- Header ---------- */
+
+.panel-head {
+  margin-bottom: 28px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ember);
+  border: 1px solid var(--ember-dim);
+  border-radius: 100px;
+  padding: 4px 10px;
+  margin-bottom: 12px;
+}
+
+.login h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin: 0;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: 0.82rem;
+  color: var(--smoke);
+  line-height: 1.5;
+}
+
+/* ---------- Field groups ---------- */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.group-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--smoke);
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--panel-border);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.74rem;
+  color: var(--ash);
+  letter-spacing: 0.02em;
+}
+
+.field label .unit {
+  color: var(--smoke);
+  font-size: 0.7rem;
+}
+
+/* ---------- Inputs & selects ---------- */
+
+.field input[type="text"],
+.field select {
+  width: 100%;
+  background: var(--field-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  color: var(--ash);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  appearance: none;
+}
+
+.field select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%238a7a6b' d='M8 11 3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+.field select option {
+  background: var(--field-bg);
+  color: var(--ash);
+}
+
+.field input[type="text"]::placeholder {
+  color: var(--smoke);
+  font-size: 0.82rem;
+}
+
+.field input[type="text"]:hover,
+.field select:hover {
+  border-color: #58422f;
+}
+
+.field input[type="text"]:focus,
+.field select:focus {
+  border-color: var(--ember);
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+}
+
+.field input[type="text"]:invalid:not(:placeholder-shown) {
+  border-color: var(--danger);
+}
+
+/* ---------- Submit button ---------- */
+
+.btn {
+  margin-top: 6px;
+  width: 100%;
+  padding: 15px 0;
+  border: none;
+  border-radius: 5px;
+  background: var(--ember);
+  color: #15110d;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.15s ease;
+  animation: ember-pulse 2.6s ease-in-out infinite;
+}
+
+.btn:hover {
+  background: #ff7d4f;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+@keyframes ember-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 107, 53, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    animation: none;
+  }
+}
+
+/* ---------- Result readout ---------- */
+
+.result {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px dashed var(--panel-border);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.result-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--smoke);
+}
+
+.result-value {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ember);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 560px) {
+  .login {
+    padding: 28px 22px 32px;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}

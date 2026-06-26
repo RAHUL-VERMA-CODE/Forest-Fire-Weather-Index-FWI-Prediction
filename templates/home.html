@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FWI Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login">
+        <div class="panel-head">
+            <span class="tag">Algerian Forest Fires Dataset</span>
+            <h1>FWI Prediction</h1>
+            <p class="subtitle">Enter today's weather and fuel readings to estimate the Fire Weather Index.</p>
+        </div>
+
+        <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+            <div class="field-group">
+                <span class="group-label">Weather conditions</span>
+                <div class="grid-2">
+                    <div class="field">
+                        <label for="Temperature">Temperature <span class="unit">°C</span></label>
+                        <input type="text" id="Temperature" name="Temperature" placeholder="e.g. 32" required="required" />
+                    </div>
+                    <div class="field">
+                        <label for="RH">Relative Humidity <span class="unit">%</span></label>
+                        <input type="text" id="RH" name="RH" placeholder="e.g. 45" required="required" />
+                    </div>
+                    <div class="field">
+                        <label for="Ws">Wind Speed <span class="unit">km/h</span></label>
+                        <input type="text" id="Ws" name="Ws" placeholder="e.g. 18" required="required" />
+                    </div>
+                    <div class="field">
+                        <label for="Rain">Rain <span class="unit">mm</span></label>
+                        <input type="text" id="Rain" name="Rain" placeholder="e.g. 0" required="required" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <span class="group-label">Fire weather indices</span>
+                <div class="grid-2">
+                    <div class="field">
+                        <label for="FFMC">FFMC</label>
+                        <input type="text" id="FFMC" name="FFMC" placeholder="e.g. 84.5" required="required" />
+                    </div>
+                    <div class="field">
+                        <label for="DMC">DMC</label>
+                        <input type="text" id="DMC" name="DMC" placeholder="e.g. 26.3" required="required" />
+                    </div>
+                    <div class="field">
+                        <label for="ISI">ISI</label>
+                        <input type="text" id="ISI" name="ISI" placeholder="e.g. 6.1" required="required" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="field-group">
+                <span class="group-label">Site details</span>
+                <div class="grid-2">
+                    <div class="field">
+                        <label for="Classes">Classes</label>
+                        <select id="Classes" name="Classes" required="required">
+                            <option value="" disabled selected>Select observed class</option>
+                            <option value="0">Not fire</option>
+                            <option value="1">Fire</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="Region">Region</label>
+                        <select id="Region" name="Region" required="required">
+                            <option value="" disabled selected>Select region</option>
+                            <option value="0">Bejaia</option>
+                            <option value="1">Sidi-Bel Abbes</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-large">
+                Predict FWI
+            </button>
+        </form>
+
+        <div class="result">
+            <span class="result-label">FWI Prediction</span>
+            <span class="result-value">{{ results }}</span>
+        </div>
+    </div>
+</body>
+</html>

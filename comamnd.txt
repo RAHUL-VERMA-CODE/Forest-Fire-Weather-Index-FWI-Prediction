@@ -1,0 +1,5 @@
+python -m venv venv
+slelect interpreter(ctrl + shift +p) 
+venv\Scripts\activate  
+pip install -r requirements.txt 
+python app.py
